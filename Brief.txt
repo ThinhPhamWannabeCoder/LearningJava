@@ -1,2 +1,0 @@
-I will review some basic concepts in Java
-do some changes
