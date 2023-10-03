@@ -14,7 +14,11 @@ Bubble Sort
 Selection Sort
 Insertion Sort
 Merge Sort
-Quick Sort
+Quick Sort - Resume here
 Heap Sort
 Counting Sort
 Radix Sort
+
+=========SEARCHING ALGORITHM======
+1. Binary Search
+2. Linear Search
