@@ -107,12 +107,37 @@ public class App {
         }
     }
 
-    static void quickSort(int[] o, int pivot){
+    static void quickSort(int[] o, int l,  int pivot){
         // Xep pivot ve dung cho
-        // int i = 
-        // while(){
+        if(pivot > l && pivot< o.length){
+            int j = -1; int temp;
+            int nextl = l+1;
+            while(l <= pivot){
+                l++;
+                if(o[l]>o[pivot]){
+                    continue;
+                }
+                else{
+                    j++;
+                    if(l==j){
+                        continue;
+                    }
+                    else{
+                        temp = o[l];
+                        o[l] = o[j];
+                        o[j] = temp;
+                        nextl = j;
+                    }
+                }
+            }
+            quickSort(o, 0, nextl-1); //trai
+            quickSort(o, nextl+1, pivot); //phai ?
+        }
+        else{
+            return;
+        }
+        
 
-        // }
         // Can co dieu kien de dung 
         // quickSort(o, pivot);
         // quickSort(o, pivot);
@@ -121,11 +146,12 @@ public class App {
         // quickSort phai
     }
     public static void main(String[] args) throws Exception {
-        
+        int[] a = {3,2,9,5,7,6,8,4};
+        quickSort(a, -1, a.length-1);
         // int[] o = Arrays.copyOfRange(a, 0, 3);
-        // for(int i = 0; i < o.length ; i++){
-        //     System.out.print(" " + o[i]);
-        // }
+        for(int i = 0; i < a.length ; i++){
+            System.out.print(" " + a[i]);
+        }
         // int[] b = Arrays.copyOfRange(a, 3, 6);
         // for(int i = 0; i < b.length ; i++){
         //     System.out.print(" " + b[i]);
