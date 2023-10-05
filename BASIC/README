@@ -1,0 +1,43 @@
+
+1. lớp lồng 
+    Lớp lồng là thao tác tổ chức trong OOP vô cùng hữu dụng khi ta có: 
+    - class B chỉ thuộc class A và không class nào khác yêu cầu
+    - Tăng tính Encapsulation
+    - Tăng tính bảo mật
+
+    Lớp lồng có 2 loại chính
+    - Inner class (non-static class)
+        Khi ta không khai báo static cho lớp lồng
+    - Static-nested class (static class)
+        Khi ta khai báo thêm static lớp lồng thì lớp lồng đó chỉ có thể truy cập biến từ class cha mang khoá static
+
+    Ngoài ra ta còn có thể lồng cả interface, nhiều interface vào trong class cha
+    Chú ý việc ta đặt từ khoá private, public trong lớp lồng là vô cùng quan trọng bởi nó sẽ ảnh hưởng tới khả năng truy cập của của lớp cha và lớp con
+    - Lớp cha để private hay public hay default thì lớp lồng đều có thể truy cập được vì lớp lồng là thành phần của lớp cha
+    - Ngược lại nếu lớp con để private thi lớp cha sẽ phải dùng getter, setter để truy cập tới biến của lớp lồng hoặc constractor củ lớp lồng
+
+2. lớp vô danh (Anonymous class, Anonymous Inner Class)
+    Mục đích sử dụng | Sử dụng khi nào
+        Khi ta không muốn phải thực sự tạo ra một class với tên đầy đủ, hoặc ta chỉ cần thành phần này 1-2 lần duy nhất mà thôi (Việc tạo ra một class mới sẽ mất thời gian công sức hơn
+        so với tạo nhanh 1-2 lớp Anonymous)
+    Đặc điểm của các lớp vô danh:
+        - Khác một class hoàn chỉnh: lớp vô danh chỉ có thể kế thừa từ 1 class hoặc implement 1 lần duy nhất mà thôi
+        - Không hề có constructor (vì class này không có tên)
+    Các loại Anonymous class
+        - Kế thừa từ lớp khác
+        - Triển khai từ interface
+        - Dùng như tham số truyền vào
+    Lưu ý khi triển 1 lớp vô danh
+        Lớp vô danh như đã nói ở trên có thể kế thừa hoặc implement, nhưng thực tế ta không cần phải dùng từ khoá extend hay implement như 1 class hoàn chỉnh mà chỉ cần dùng new <ten> {}
+        Và khai báo các biến (nếu cần) và method như một class bìnht thường
+        Tuy nhiên t dùng X x = new X(){} thì X không phải tên class mà là class ta kế thừa hoặc implement (java tự nhận dạng) -> Ta không thể dùng constructor vì không có tên
+3. Wrapper
+    - Là một non-primitive data type || Object và chứa kiểm dữ liệu Primitive đơn giản thuần tuý và giá trị null nếu giá trị primitive không được khai báo
+    Việc sử dụng Wrapper là để có thể giúp cho biến mang giá trị null, phục vụ một số tiến trình chỉ có thể vận dụng kiểu dữ liệu non-primitve để làm viêc
+        - Collections (ArrayList, Map chỉ hỗ trợ Wrapper||Object||Non-Primitive)
+        - Generics
+        - Hỗ trợ null (Hiện tại tôi chưa biết về nó nhưng khi biết thì tôi sẽ quay lại sau)
+
+    Đặc điểm
+        - Immutable
+        - Final
