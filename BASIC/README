@@ -35,9 +35,56 @@
     - Là một non-primitive data type || Object và chứa kiểm dữ liệu Primitive đơn giản thuần tuý và giá trị null nếu giá trị primitive không được khai báo
     Việc sử dụng Wrapper là để có thể giúp cho biến mang giá trị null, phục vụ một số tiến trình chỉ có thể vận dụng kiểu dữ liệu non-primitve để làm viêc
         - Collections (ArrayList, Map chỉ hỗ trợ Wrapper||Object||Non-Primitive)
-        - Generics
+        - Generic (Dung Generic để chỉ thị rõ kiểu dữ liệu khi làm việc với Class hàm)
         - Hỗ trợ null (Hiện tại tôi chưa biết về nó nhưng khi biết thì tôi sẽ quay lại sau)
 
     Đặc điểm
         - Immutable
         - Final
+4. Try and Catch
+    Try and Catch là việc chúng ta chủ động bắt lỗi và hiển thị thông tin thân thiệt với người dùng (chỉ đơn giản thế thôi)
+    Nhưng để biết được cách Try and Catch hiệu quả ta cần: Biết phân loại Exceptions    Biết Catch có kĩ thuật gì   
+    Ngoài ra ta còn có thể lồng try and catch trong try và finally
+    a.
+    b.
+    c.
+        c.1  Try Catch với Finally
+            Finally: đóng các tài nguyên khi exception xảy ra (tiết nghiệm tài nguyên cho máy tính)
+            Khi có Finally trong code thì code trong Finally luôn đợc gọi cuối cùng
+
+            Một ứng dụng hữu ích của Finally  là đóng file
+                Khi thực hiện một try trong tập code mở file thì có tiềm năng xảy ra xung đột file giữa các ứng dụng  
+                Nếu ta để close cùng trong try thì có thể sẽ xuất hiện lỗi và không thể đóng file
+                -> Để close ở finally để hoàn tất đóng file
+        c.2  Try Catch với resource
+            Nâng cấp so với Try Catch với Finally
+            Nhằm tự động trả tài nguyên mà không cần Finally
+            Nêu lỗi tại khâu trả tài nguyên thì không tung ra exceptions
+            Có thể dùng nhiều tài nguyên tại đây
+        c.3  Các phương thức hữu ích của lớp Exception
+            getMessage()
+            toSttring()
+            printStackTrace()
+5. Thread | Multithread
+    Việc áp dụng lập trình đa nhiệm trong ứng dụng là điều tôi cần thiết để đảm bảo trải nghiệm trôi chảy của người dùng 
+    Với kiến thức hiện tại và nguyên vọng học hành thì mình sẽ quay lại nó sau
+    Và Để gửi một method vào Thread thì ta cần thừa kế nó từ cthw viện Thread
+6. Về Generic
+    Là cách mà chúng ta áp dụng việc tái sử dụng code trong bài của mình
+    Với Generic thì các nhiệm vụ cùng thao tác nhưng khác kiểu dữ liệu thì ta không cần phải viết lại code từ đầu và sửa nữa 
+    -> chỉ việc dùng Generic
+    Syntax <T> còn chỉ định cụ thể kiểu dữ liệu <data type>
+    Generic còn được gọi là Typed Parameters. -> tham số gửi vào là kiểu dữ liệu nào thì thực thi đúng kiểu đó luôn
+    -> Chính vì chung chung nên sau này mình sẽ cần phải giải quyết một số lỗi khi dùng nhiều generic
+
+    Trước khi mà có Generic thì ta xử lý vấn đề tái sử dụng dữ liệu bằng LỚP KÉ THỪA - Dùng lớp cha làm lớp đại diện chung, rồi unboxing về lớp con cụ thể tương ứng
+    Tuy nhiên chứa đựng 1 số rủi ro
+    - Một số kiểu dữ liệu không mong muốn sẽ lọt vào
+    - Phải ép kiểu về kiểu cụ thể -> dễ crash -> Có thể dùng Try and Catch -> Mất công 
+
+    Cách xử lý của Generic
+
+    public static <T extends Comparable> T minFromTwoNumbers(T one, T two) 
+    T là extend từ Comparable 
+    Các kiểu dữ liệu như String, số đều implement Comparable  còn những kiểu dữ liệu như một Class nào đó sẽ không thể truyền vào -> tránh crash ứng dụng
+    Ngoài ra Comparable còn gửi cho chúng ta một số method để làm việc luôn  như one.compareTo(two)
