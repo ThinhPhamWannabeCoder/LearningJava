@@ -88,3 +88,77 @@
     T là extend từ Comparable 
     Các kiểu dữ liệu như String, số đều implement Comparable  còn những kiểu dữ liệu như một Class nào đó sẽ không thể truyền vào -> tránh crash ứng dụng
     Ngoài ra Comparable còn gửi cho chúng ta một số method để làm việc luôn  như one.compareTo(two)
+
+========================================================================================================
+
+Monday 09.10.2023
+Hôm nay mình sẽ ngồi ôn tập  + làm bài tập toàn bộ Java cơ bản + OOP cơ bản 
+ứng dụng các kiến thức vừa học = Wrapper, Generic, Try and Catch vào trong quản lý nho nhỏ nhỏ
+- Còn thời gian thì học thêm về  Collections - Chắc bây giờ ngồI đọc luôn collection Stream cho dễ tưởng tượng -> như thế này mới làm được bài tập OOP
+
+Collections - Tên thư viện
+- Collection là interface root của nhiều interface khác như List, Queue, Deque .... và Collection cũng được thừa kế từ root interface Iterable (để chạy vòng lặc, kế tiếp nhau)
+- Khi muốn truy cập biến trong các interface này ta phải dùng getter và setter cũng như ác method khác support quá trình làm việc với kiểu cấu trúc dữ liệu cụ thể
+- Nhưng vì tất các cùng chung root Collection và Iterable nên các Method trong 2 Interface này đều có thể sử dụng tại tất cả các interface cụ thể bên dưới
+
+- Thông thường chúng ta dùng upcasting để làm việc dễ dàng hơn cho quá trình quản lý đa dạng chủ thể thông qua base class
+
+a. Cách Iterate qua từng dữ liêu qua Iterator và for each
+    List<String> arrList = new ArrayList<>();
+    Iterator<String> itr = arrList.iterator();
+    while(itr.hasNext()){
+        System.out.print(itr.next()+" ");
+    }
+b. Iterate cura for loop
+    int length = arrList.size();
+    for(int i = 0; i< length; i++){
+        System.out.println(list.get(i) +" ");
+    }
+
+
+
+LinkedList
+    a. Về vòng for, removeAll, retainAll, addAll thì dễ hiểu
+    b. Tìm kiếm trong linkedList
+        Ngoài các sử dụng for thì ta có thể sử dụng contains() 
+        List<String> linkedList = LinkedList<>();
+        linkedList.add("Thinh");
+        linkedList.add("Dep");
+        linkedList.add("Trai");
+        linkedList.contains("Thinh ") => tra ve true
+
+        Vị trí xuất hiện đầu tiên
+        linkedList.indexOf("Thinh") -> o
+
+        Vị trí xuất hiện cuối cùng
+        linkedList.lastIndexOf("Dep") -> 1
+
+        Chuyển LinkedList qua Array
+        linkedList.toArray()
+ArrayList và LinkedList
+
+    Khi nào dùng
+    a. ArrayList:   Truy xuất nhiều hơn cấp nhật + xoá
+        Những điểm cần ghi nhớ về ArrayList:
+
+            Lớp ArrayList trong java có thể chứa các phần tử trùng lặp.
+            Lớp ArrayList duy trì thứ tự của phần tử được thêm vào.
+            Lớp ArrayList là không đồng bộ (non-synchronized).
+            Lớp ArrayList cho phép truy cập ngẫu nhiên vì nó lưu dữ liệu theo chỉ mục.
+            Lớp ArrayList trong java, thao tác chậm vì cần nhiều sự dịch chuyển nếu bất kỳ phần tử nào bị xoá khỏi danh sách.
+
+    b. LinkedList   Cập nhật + xuát nhiều hơn truy xuất
+
+        Những điểm cần ghi nhớ về lớp LinkedList:
+
+            Lớp LinkedList trong java có thể chứa các phần tử trùng lặp.
+            Lớp LinkedList duy trì thứ tự của phần tử được thêm vào.
+            Lớp LinkedList là không đồng bộ (non-synchronized).
+            Trong java lớp LinkList, thao tác nhanh vì không cần phải dịch chuyển nếu bất kỳ phần tử nào bị xoá khỏi danh sách.
+            Lớp LinkedList trong java có thể được sử dụng như list (danh sách), stack (ngăn xếp) hoặc queue (hàng đợi).
+
+    ArrayList	LinkedList
+1) ArrayList nội bộ sử dụng mảng động để lưu trữ các phần tử.	LinkedList nội bộ sử dụng danh sách liên kết doubly để lưu trữ các phần tử.
+2) Thao tác với ArrayList là chậm bởi vì nó sử dụng nội bộ mảng. Nếu bất kỳ phần tử nào được xoá khỏi mảng, tất cả các bit được chuyển trong bộ nhớ.	Thao tác với LinkedList là nhanh hơn so với ArrayList bởi vì nó sử dụng danh sách liên kết doubly do đó không cần chuyển đổi bit nào trong bộ nhớ.
+3) Lớp ArrayList trong java chỉ có thể hoạt động như một list vì nó chỉ implements giao tiếp List.	Lớp LinkedList trong java có thể hoạt động như một list và queue(hàng đợi) vì nó implements các giao tiếp List và Deque.
+4) ArrayList là tốt hơn trong việc lưu trữ và truy cập dữ liệu.	LinkedList là tốt hơn trong việc thao tác dữ liệu.
