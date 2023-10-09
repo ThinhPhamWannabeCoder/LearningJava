@@ -158,7 +158,67 @@ ArrayList và LinkedList
             Lớp LinkedList trong java có thể được sử dụng như list (danh sách), stack (ngăn xếp) hoặc queue (hàng đợi).
 
     ArrayList	LinkedList
-1) ArrayList nội bộ sử dụng mảng động để lưu trữ các phần tử.	LinkedList nội bộ sử dụng danh sách liên kết doubly để lưu trữ các phần tử.
-2) Thao tác với ArrayList là chậm bởi vì nó sử dụng nội bộ mảng. Nếu bất kỳ phần tử nào được xoá khỏi mảng, tất cả các bit được chuyển trong bộ nhớ.	Thao tác với LinkedList là nhanh hơn so với ArrayList bởi vì nó sử dụng danh sách liên kết doubly do đó không cần chuyển đổi bit nào trong bộ nhớ.
-3) Lớp ArrayList trong java chỉ có thể hoạt động như một list vì nó chỉ implements giao tiếp List.	Lớp LinkedList trong java có thể hoạt động như một list và queue(hàng đợi) vì nó implements các giao tiếp List và Deque.
-4) ArrayList là tốt hơn trong việc lưu trữ và truy cập dữ liệu.	LinkedList là tốt hơn trong việc thao tác dữ liệu.
+        1) ArrayList nội bộ sử dụng mảng động để lưu trữ các phần tử.	LinkedList nội bộ sử dụng danh sách liên kết doubly để lưu trữ các phần tử.
+        2) Thao tác với ArrayList là chậm bởi vì nó sử dụng nội bộ mảng. Nếu bất kỳ phần tử nào được xoá khỏi mảng, tất cả các bit được chuyển trong bộ nhớ.	Thao tác với LinkedList là nhanh hơn so với ArrayList bởi vì nó sử dụng danh sách liên kết doubly do đó không cần chuyển đổi bit nào trong bộ nhớ.
+        3) Lớp ArrayList trong java chỉ có thể hoạt động như một list vì nó chỉ implements giao tiếp List.	Lớp LinkedList trong java có thể hoạt động như một list và queue(hàng đợi) vì nó implements các giao tiếp List và Deque.
+        4) ArrayList là tốt hơn trong việc lưu trữ và truy cập dữ liệu.	LinkedList là tốt hơn trong việc thao tác dữ liệu.
+
+==========
+Stream API
+    - Là gì: abstract layer được đưa vào trong Java 8 -> Big Change
+            
+    - Mục đích: dễ dàng hơn cho làm việc tuần tự, nhiều phương thức hỗ trợ các công việc khó khăn để mình tập trung xử lý logic
+    - Cách truy cập
+        Có thể được tạo từ Collection, Arrays hoặc I/O resources
+        Mặc định kế thừa của Collection đều có .stream()
+    
+    Ví dụ
+        Collection<String> collection = Arrays.asList("hello", "loda", "kaka");
+        Stream<String> streamOfCollection = collection.stream(); // Tạo ra một stream từ collection
+    Đặc điểm
+        Stream ko dùng để lưu trữ mà chỉ để xử lý dữ liệu mà thôi
+        -> ta gán quá trình xử lý vào Stream<String> stream  rồi gắn vào List<String> str = stream -> Không thành công, Error
+    - Các phương thức kèm theo hỗ trợ
+        a. forEach
+            Duyệt từng thành phần một cách tuần tự, ko thể thay đổi dữ liệu
+            list.stream().forEach(o -> System.out.println(o));
+        b. map
+            Tạo giá trị mới từ giá trị hiện có ? 
+            Tức là nó sẽ map vị trí hiện thời với giá trị mới
+            list.stream().map(o->o++).map(String::toUpperCase).forEach(System.out.prinlin(o));
+                                        Đây là một method reference
+                                        == o->o.toUpperCase() 
+                                        Cách thức gọi: tên class::tên method 
+        c.  filter
+            Thao tác với dữ liệu mong muốn
+            list.stream().filter(o->o%2==0).map(i->"Thinh " + 2).map(String::toUpperCase).forEach(System.out::println());
+        d. limit
+            Giống trong CSDL, dùng để giới hạn số lượng dữ liệu cần xử lý
+
+            list.stream().filter(o->o%2==0).map(o->"Thinh" + o).map(String::toUpperCase).limit(10).forEach(System.out::println())
+        e. sorted
+            Như cái tên
+
+            list.stream().filter(o->o%2==1).map(o->"Thinh" + o).map(String::toUpperCase).limit(10).sorted().forEach(System.out::println());
+
+            Ngoài ra mình cũng có thể tự dịnh nghĩa cách sort bằng cách thêm Comparator vào
+
+            sorted((o1, o2) -> o1.compareTo(o2))
+        
+        d. collect
+            Giúp ta ta lấy toàn bộ dữ liệu đã biến độ trong Stream rồi gắn với đối tượng mong muốn
+            List<String> result = IntStream.range(1, 1000).boxed()
+                                .filter(i -> i % 2 != 0)
+                                .map(i -> "loda-" + i)
+                                .map(String::toUpperCase)
+                                .limit(10)
+                                .sorted(Comparator.naturalOrder()) // một cách khác để sort
+                                .collect(Collectors.toList());
+
+    Nhận xét
+        stream là: lazy evaluation: 
+            Nó nhận được hết các thao tác chúng ta đã khai báo rồi mới thực hiện toàn bộ trong 1 vòng lặp duy nhất 
+            -> tiết kiệm tài nguyên và thời gian
+
+            Bổ sung kiến thức: terminal operation: tức thao tác kết thúc, đánh dấu cho lazy evaluation thực hiện
+                .collect()  .min() .max() .count()
