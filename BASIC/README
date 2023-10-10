@@ -222,3 +222,21 @@ Stream API
 
             Bổ sung kiến thức: terminal operation: tức thao tác kết thúc, đánh dấu cho lazy evaluation thực hiện
                 .collect()  .min() .max() .count()
+========================================================================================================
+
+Tuesday 10.10.2023 
+
+1. Java Relection (Hiện chưa hiểu lắm về ứng dụng thực tế trong )
+
+    Mục đích: Tìm kiếm, Gọi: Fields, Method, Constructor ở trong 1 CLASS
+    Ứng dụng: Mapping dữ liệu giữa Object và các bảng trong CSDL
+        Cụ thể: ta có Class A với n object từ class A, ta muốn gán dữ liệu từ CSDL vào các object n nhưng ta không biết làm cách nào để gán qua vòng lặp
+            Ta có thể dùng Java reflection từ Class -> thực hiện một số phép tìm kiếm để map dữ liệu ứng với các Field rồi ta sử dụng
+            <field-name>Field.set(<object-name>, <value>)
+    Các chức năng
+    - Lấy field                     girl.getClass().getDeclaredFields()   getDeclaredField(<name-neu can>)
+    - Lấy Method                    girl.getClass().getDeclaredMethods()    getDeclaredMethod(<name-neu can>)
+    - Lấy constructor               girl.getClass().getContructors()
+    - Lấy thông qua Annotation      girl.getClass().getAnnotations
+
+    Ứng dụng tốt trong Mapping nhưng trong Java Springboot thì ta dùng Hibernate và các Annotation để Springboot xử lý (theo cơ chế IoC) hộ chúng ta rồi
